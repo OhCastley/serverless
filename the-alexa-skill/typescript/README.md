@@ -82,11 +82,33 @@ You need to add your ClientID, ClientSecret, Refresh Token and VendorID to the s
 12. Go to the AWS Console and navigate to DynamoDB. Open your tables and find the one corresponding to TheAlexaSkillStack.
 13. Confirm that one item is in the table (It should have 2 attributes and a UserID). If it does then congratulations! Everything works! 
 
-## Useful commands
+## Want to add media files to your skill?
+1. You will need to go into the AWS console and create a public S3 bucket. WARNING: Be careful when making a public S3 bucket as they can pose a security risk. Do NOT upload anything confidential into it.
+2. Upload your chosen media file to the bucket and copy its URL.
+3. In your chosen Handler, under the line that reads "handle(handlerInput)...", add a new variable with an appropriate name and set its value to your copied URL as a string.
+4. Change ".withSimpleCard" to ".withStandardCard" and add your variable as a third argument.
+5. Your new code should look similar to this:
+```
+async handle(handlerInput: HandlerInput): Promise<Response> {
+        const pictureURL = 'your URL here'
+        const speechText = 'Hey, it\'s Pancakes the CDK Otter here, what would you like to know?';
+        const repromptText = 'You can ask what CDK Patterns I have, if you like!';
+        const { attributesManager } = handlerInput;
+        attributesManager.setPersistentAttributes( {lastAccessedDate: Date.now(), lastAccessedIntent: 'Launch Request or Navigate Home'});
+        await attributesManager.savePersistentAttributes();
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(repromptText)
+            .withStandardCard('Hello World', speechText, pictureURL)
+            .getResponse();
+    },
+```
+6. Testing is largely the same as before, just be sure to evoke the particular intent you inserted the media file into!
 
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `npm run deploy`  deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+Additional information can be found by opening the following link. Just bear in mind that this page details what to do with an Alexa-Hosted skill so the code may be slightly different to yours.
+https://developer.amazon.com/es-MX/docs/alexa/hosted-skills/alexa-hosted-skills-media-files.html#view-s3
+
+## Available Versions
+
+ * [TypeScript](typescript/)
+ * [Python](python/)

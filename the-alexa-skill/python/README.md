@@ -82,58 +82,33 @@ You need to add your ClientID, ClientSecret, Refresh Token and VendorID to the s
 12. Go to the AWS Console and navigate to DynamoDB. Open your tables and find the one corresponding to TheAlexaSkillStack.
 13. Confirm that one item is in the table (It should have 2 attributes and a UserID). If it does then congratulations! Everything works! 
 
-## Useful CDK Commands
-
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
-
-This project is set up like a standard Python project.  The initialization
-process also creates a virtualenv within this project, stored under the .env
-directory.  To create the virtualenv it assumes that there is a `python3`
-(or `python` for Windows) executable in your path with access to the `venv`
-package. If for any reason the automatic creation of the virtualenv fails,
-you can create the virtualenv manually.
-
-To manually create a virtualenv on MacOS and Linux:
-
+## Want to add media files to your skill?
+1. You will need to go into the AWS console and create a public S3 bucket. WARNING: Be careful when making a public S3 bucket as they can pose a security risk. Do NOT upload anything confidential into it.
+2. Upload your chosen media file to the bucket and copy its URL.
+3. In your chosen Handler, under the line that reads "handle(handlerInput)...", add a new variable with an appropriate name and set its value to your copied URL as a string.
+4. Change ".withSimpleCard" to ".withStandardCard" and add your variable as a third argument.
+5. Your new code should look similar to this:
 ```
-$ python3 -m venv .env
+async handle(handlerInput: HandlerInput): Promise<Response> {
+        const pictureURL = 'your URL here'
+        const speechText = 'Hey, it\'s Pancakes the CDK Otter here, what would you like to know?';
+        const repromptText = 'You can ask what CDK Patterns I have, if you like!';
+        const { attributesManager } = handlerInput;
+        attributesManager.setPersistentAttributes( {lastAccessedDate: Date.now(), lastAccessedIntent: 'Launch Request or Navigate Home'});
+        await attributesManager.savePersistentAttributes();
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(repromptText)
+            .withStandardCard('Hello World', speechText, pictureURL)
+            .getResponse();
+    },
 ```
+6. Testing is largely the same as before, just be sure to evoke the particular intent you inserted the media file into!
 
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
+Additional information can be found by opening the following link. Just bear in mind that this page details what to do with an Alexa-Hosted skill so the code may be slightly different to yours.
+https://developer.amazon.com/es-MX/docs/alexa/hosted-skills/alexa-hosted-skills-media-files.html#view-s3
 
-```
-$ source .env/bin/activate
-```
+## Available Versions
 
-If you are a Windows platform, you would activate the virtualenv like this:
-
-```
-% .env\Scripts\activate.bat
-```
-
-Once the virtualenv is activated, you can install the required dependencies.
-
-```
-$ pip install -r requirements.txt
-```
-
-At this point you can now synthesize the CloudFormation template for this code.
-
-```
-$ cdk synth
-```
-
-To add additional dependencies, for example other CDK libraries, just add
-them to your `setup.py` file and rerun the `pip install -r requirements.txt`
-command.
-
-## Useful commands
-
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
-
-Enjoy!
+ * [TypeScript](typescript/)
+ * [Python](python/)
