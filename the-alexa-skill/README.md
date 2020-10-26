@@ -83,8 +83,25 @@ You need to add your ClientID, ClientSecret, Refresh Token and VendorID to the s
 13. Confirm that one item is in the table (It should have 2 attributes and a UserID). If it does then congratulations! Everything works! 
 
 ## Want to add media files to your skill?
-1. You will need to go into the AWS console and create a public S3 bucket. WARNING: Be careful when making a public S3 bucket as they can pose a security risk. Do NOT upload anything confidential into it.
-2. Upload your chosen media file to the bucket and copy its URL.
+1. Add an import statement for your s3 bucket as well as one for s3 deploy at the top of your stack code. They should look similar to this:
+```
+import * as s3 from '@aws-cdk/aws-s3';
+import s3deploy = require('@aws-cdk/aws-s3-deployment');
+```
+2. Initialise your s3 Bucket. The removal policy is optional and should only to put there if you want your bucket to delete when you've deleted your stack.
+```
+const mediaBucket = new s3.Bucket(this, 'mediaBucket', {
+      removalPolicy: cdk.RemovalPolicy.DESTROY
+    });
+```
+3. Choose your media file, compress it and ensure it is placed into the appropriate file path. Enter your s3 deploy code.
+```
+new s3deploy.BucketDeployment(this, 'uploadMedia', {
+      sources: [s3deploy.Source.asset('Enter the path to your zipped file within these quotes')],
+      destinationBucket: mediaBucket,
+      retainOnDelete: false
+    });
+```
 3. In your chosen Handler, under the line that reads "handle(handlerInput)...", add a new variable with an appropriate name and set its value to your copied URL as a string.
 4. Change ".withSimpleCard" to ".withStandardCard" and add your variable as a third argument.
 5. Your new code should look similar to this:
