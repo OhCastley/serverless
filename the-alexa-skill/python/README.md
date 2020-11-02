@@ -102,12 +102,12 @@ new s3deploy.BucketDeployment(this, 'uploadMedia', {
       retainOnDelete: false
     });
 ```
-3. In your chosen Handler, under the line that reads "handle(handlerInput)...", add a new variable with an appropriate name and set its value to your copied URL as a string.
-4. Change ".withSimpleCard" to ".withStandardCard" and add your variable as a third argument.
-5. Your new code should look similar to this:
+4. In your chosen Handler, under the line that reads "handle(handlerInput)...", add a new variable with an appropriate name (e.g. "imageURL") and leave it blank for now.
+5. Change ".withSimpleCard" to ".withStandardCard"
+6. Your new code should look similar to this:
 ```
 async handle(handlerInput: HandlerInput): Promise<Response> {
-        const pictureURL = 'your URL here'
+        const imageURL = ''
         const speechText = 'Hey, it\'s Pancakes the CDK Otter here, what would you like to know?';
         const repromptText = 'You can ask what CDK Patterns I have, if you like!';
         const { attributesManager } = handlerInput;
@@ -116,11 +116,31 @@ async handle(handlerInput: HandlerInput): Promise<Response> {
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(repromptText)
-            .withStandardCard('Hello World', speechText, pictureURL)
+            .withStandardCard('Hello World', speechText)
             .getResponse();
     },
 ```
-6. Testing is largely the same as before, just be sure to evoke the particular intent you inserted the media file into!
+7. Deploy your stack.
+8. Once deployed, in the S3 section of the AWS Console, find the correct bucket and media file and copy the "Object URL"
+9. Paste this value into your variable from step 4 as a string and add the variable as a third argument to "withStandardCard"
+10. Your code should look similar to this, notice the difference between this code and step 6:
+```
+async handle(handlerInput: HandlerInput): Promise<Response> {
+        const imageURL = 'your URL here'
+        const speechText = 'Hey, it\'s Pancakes the CDK Otter here, what would you like to know?';
+        const repromptText = 'You can ask what CDK Patterns I have, if you like!';
+        const { attributesManager } = handlerInput;
+        attributesManager.setPersistentAttributes( {lastAccessedDate: Date.now(), lastAccessedIntent: 'Launch Request or Navigate Home'});
+        await attributesManager.savePersistentAttributes();
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(repromptText)
+            .withStandardCard('Hello World', speechText, imageURL)
+            .getResponse();
+    },
+```
+11. Redeploy your stack (You do not need to delete the stack to redeploy) and it should be updated!
+12. Testing is largely the same as before, just be sure to evoke the particular intent you inserted the media file into!
 
 Additional information can be found by opening the following link. Just bear in mind that this page details what to do with an Alexa-Hosted skill so the code may be slightly different to yours.
 https://developer.amazon.com/es-MX/docs/alexa/hosted-skills/alexa-hosted-skills-media-files.html#view-s3
