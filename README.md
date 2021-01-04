@@ -189,6 +189,18 @@ npx cdk deploy
 
   <br /><hr /><br />
 
+  #### [The Media Live Stream](the-media-live-stream/README.md)
+  This is an example of how to deploy a Serverless environment to stream live event content.
+  ![Architecture](the-media-live-stream/img/the-media-live-stream.png)
+
+  <br /><hr /><br />
+
+  #### [The Predictive Lambda](the-predictive-lambda/README.md)
+  Deploy a custom Python ML model inside a Docker container running on AWS Lambda
+  ![Architecture](the-predictive-lambda/img/arch_with_cdkp.png)
+
+  <br /><hr /><br />
+
   #### [The RDS Proxy](the-rds-proxy/README.md)
   Use RDS Proxy to protect a MySQL RDS Instance from the massively scalable Lambda Function querying it
   ![Architecture](the-rds-proxy/img/arch_overview.png)
@@ -204,6 +216,12 @@ npx cdk deploy
   #### [The Scalable Webhook](/the-scalable-webhook/README.md)
   Need to integrate a non serverless resource like RDS with a serverless one like Lambda? This is your pattern <br /><br />
   ![Architecture](https://raw.githubusercontent.com/cdk-patterns/serverless/master/the-scalable-webhook/img/architecture.png)
+
+  <br /><hr /><br />
+
+  #### [The Scheduled Lambda](/the-scheduled-lambda/README.md)
+  Use EventBridge to trigger a Lambda Fuction on a schedule <br /><br />
+  ![Architecture](the-scheduled-lambda/img/the-scheduled-lambda.png)
 
   <br /><hr /><br />
 
@@ -225,6 +243,12 @@ npx cdk deploy
 
   <br /><hr /><br />
 
+  #### [The WAF API Gateway](/the-waf-apigateway/README.md)
+  This is a cdk stack to deploy a simple API gateway, and attach a WAF (Web Applicaiton Firewall) <br />
+  ![Architecture](the-waf-apigateway/img/the-waf-apigateway.png)
+
+  <br /><hr /><br />
+
   #### [The X-Ray Tracer](the-xray-tracer/README.md)
   Learn about using AWS X-Ray for tracing events through your system. This pattern has X-Ray enabled on API Gateway, Lambda, DynamoDB, External HTTP calls, SNS and SQS
   
@@ -240,17 +264,20 @@ npx cdk deploy
   <br />
   
   * [Alex Casalboni](#alex-casalboni)
+  * [Andrew Frazer](#andrew-frazer)
   * [Ariadna Sanchez](#ariadna-sanchez)
   * [Chris Plankey](#chris-plankey)
   * [Christian Mueller](#christian-mueller)
   * [Danilo Poccia](#danilo-poccia)
   * [Eric Johnson](#eric-johnson)
+  * [Gerald Stewart](#gerald-stewart)
   * [Gunnar Grosch](#gunnar-grosch)
   * [Heitor Lessa](#heitor-lessa)
   * [Hervé Nivon](#hervé-nivon)
   * [James Beswick](#james-beswick)
   * [Jeremy Daly](#jeremy-daly)
   * [Joppe Pelzer](#joppe-pelzer)
+  * [Leandro Damascena](#leandro-damascena)
   * [Matt Coulter](#matt-coulter)
   * [Thorsten Hoeger](#thorsten-hoeger)
   * [Vyas Sarangapani](#vyas-sarangapani)
@@ -271,6 +298,17 @@ npx cdk deploy
 
   <br /><hr /><br />
 
+  ### Andrew Frazer
+  <img src="img/dev_profiles/andrew_frazer.jpeg" width="120" alt="Andrew Frazer profile pic" /><br />
+
+  Github - [@mrpackethead](https://github.com/mrpackethead)<br />
+
+  #### [The WAF API Gateway](/the-waf-apigateway/README.md)
+  This is a cdk stack to deploy a simple API gateway, and attach a WAF (Web Applicaiton Firewall) <br />
+  ![Architecture](the-waf-apigateway/img/the-waf-apigateway.png)
+
+  <br /><hr /><br />
+
   ### Ariadna Sanchez
   <img src="img/dev_profiles/ariadna-sanchez.jpg" width="120" alt="Ariadna Sanchez profile pic" /><br />
 
@@ -286,7 +324,7 @@ npx cdk deploy
   ### Chris Plankey
   <img src="img/dev_profiles/chris_plankey.png" width="120" alt="Chris Plankey profile pic" /><br />
 
-  Many hats. Few servers. AWS Portsmouth User Group Co-Organizer and AWS Community Builder.<br />
+  CTO of MaverickApp.io, AWS Portsmouth User Group Co-Organizer and AWS Community Builder.<br />
 
   Github - [@cplankey](https://github.com/cplankey) <br />
   Twitter - [@serverlesschris](https://twitter.com/serverlesschris) <br />
@@ -341,6 +379,20 @@ npx cdk deploy
   You can integrate API Gateway directly with DynamoDB and that way your systems can be more resilient! &quot;Code is a liability&quot; so less lambda functions, less liability
 
   ![Architecture](https://raw.githubusercontent.com/cdk-patterns/serverless/master/the-dynamo-streamer/img/arch.jpg)
+
+  <br /><hr /><br />
+
+  ### Gerald Stewart
+  <img src="img/dev_profiles/gerald_stewart.jpg" width="120" alt="Gerald Stewart profile pic" /><br />
+
+  Software Engineer @Liberty_IT<br />
+
+  Twitter - [@_gerald20](https://twitter.com/_gerald20)<br />
+
+  #### [The Scheduled Lambda](/the-scheduled-lambda/README.md)
+  Use EventBridge to trigger a Lambda Fuction on a schedule <br /><br />
+
+  ![Architecture](the-scheduled-lambda/img/the-scheduled-lambda.png)
 
   <br /><hr /><br />
 
@@ -453,6 +505,17 @@ npx cdk deploy
 
   <br /><hr /><br />
 
+  ### Leandro Damascena
+  <img src="img/dev_profiles/leandro-damascena.jpg" width="120" alt="Leandro Damascena profile pic" /><br />
+
+  Cloud Solutions Architect, Writer http://leandrodamascena.medium.com and Open-source enthusiast.<br />
+
+  #### [The Media Live Stream](the-media-live-stream/README.md)
+  This is an example of how to deploy a Serverless environment to stream live event content.
+  ![Architecture](the-media-live-stream/img/the-media-live-stream.png)
+
+  <br /><hr /><br />
+
   ### Matt Coulter
   <img src="img/dev_profiles/nideveloper.png" width="120" alt="nideveloper profile pic" /><br />
 
@@ -480,6 +543,12 @@ npx cdk deploy
   You can decouple your event driven architectures with EventBridge rules and now you can strip the custom EventBridge code from your Lambda functions with Lambda Destinations.
 
   ![Architecture](the-destined-lambda/img/arch.png)
+
+  #### [The Predictive Lambda](the-predictive-lambda/README.md)
+
+  Deploy a custom Python ML model inside a Docker container running on AWS Lambda
+  
+  ![Architecture](the-predictive-lambda/img/arch_with_cdkp.png)
 
   #### [The RDS Proxy](the-rds-proxy/README.md)
   Use RDS Proxy to protect a MySQL RDS Instance from the massively scalable Lambda Function querying it
