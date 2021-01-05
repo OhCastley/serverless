@@ -25,6 +25,7 @@ If just getting started with this I would reccomend reading this [blog post](htt
 
 * If you havent got an IDP and you want to follow along then something like Auth0 might work for you getting up and running.
     - [Auth0 Quick Start](https://auth0.com/docs/quickstart/webapp)
+    - When working through the quick start, your **Allowed Callback URL** and **Allowed Logout URL** fields are as simple as using a localhost address with "/Callback" and "/Logout" at the end of each.
 
 * Open the `cdk/lib/configuration/stack-configuration.ts` set the values for the 
     - `EXTERNAL_IDENTITY_PROVIDER_NAME` and 
