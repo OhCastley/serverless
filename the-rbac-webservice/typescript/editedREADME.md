@@ -74,7 +74,7 @@ More Information on the purpose of this App Client can be found [here](https://d
 
 * Give Cognito a unique domain name setting the `COGNITO_DOMAIN` Configuration item. (i.e. if Auth0 use 'Auth0')
 * Set the standard Call Back and Log-out URLs information for your UI-Application setting the `CLIENT_CALLBACKURLS` and `CLIENT_LOGOUTURLS`.
-* As well as the standard Call Back URL, add "https://[YOUR COGNITO DOMAIN NAME].auth.us-east-1.amazoncognito.com/saml2/idpresponse"
+* Within Auth0, if needed, add **https://[YOUR COGNITO DOMAIN NAME].auth.us-east-1.amazoncognito.com/saml2/idpresponse** as an **Allowed Callback URL**.
 * Have a think about the scopes your client needs in terms of its OIDC Flow. Configure the remaining settings as required.
 
 ### 4 - Understand the Role Based Mapping for Access to the Sample Web Services in this Stack.
