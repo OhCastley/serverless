@@ -10,7 +10,7 @@ Do you manage your users and their access controls/definitions in an external Id
 
 ## What is Role-Based-Access-Control (RBAC)
 
-Role-based access control (RBAC) is an idea of assigning permissions to users based on their role within an orgnaisation. It offers a simple, manageable approach to access management that is less prone to error than assigning permissions to users individually.
+Role-based access control (RBAC) is an idea of assigning permissions to users based on their role within an organisation. It offers a simple, manageable approach to access management that is less prone to error than assigning permissions to users individually.
 
 When using RBAC, you analyze the system needs of your users and group them into roles based on common responsibilities and needs. You then assign one or more roles to each user and one or more permissions to each role. The user-role and role-permissions relationships make it simple to perform user assignments since users no longer need to be managed individually, but instead have privileges that conform to the permissions assigned to their role(s).
 
@@ -23,9 +23,12 @@ If just getting started with this I would reccomend reading this [blog post](htt
 
 ### 1 - Get your IDP Integration Configuration OR set one up
 
-* If you havent got an IDP and you want to follow along then something like Auth0 might work for you getting up and running.
-    - [Auth0 Quick Start](https://auth0.com/docs/quickstart/webapp)
-    - When working through the quick start, your **Allowed Callback URL** and **Allowed Logout URL** fields are as simple as using a localhost address with "/Callback" and "/Logout" at the end of each.
+* If you haven't got an IDP and you want to follow along then something like Auth0 might work for you getting up and running. You cn follow these steps if you're unsure of how to get started with Auth0.
+    - [Auth0](https://auth0.com)
+    - Log in or sign up and open your dashboard.
+    - Go to **Applications** on the left hand side and choose **Create Application**.
+    - If you don't know what option to select, then choose **Regular Web Application** and **node.js** on the next screen.
+    - Go to settings and set your **Allowed Callback URL** as http://localhost:8080/callback and the **Allowed Logout URL** as http://localhost:8080/logout. It doesn't necessarily have to be 8080, just whatever port suits you.
 
 * Open the `cdk/lib/configuration/stack-configuration.ts` set the values for the 
     - `EXTERNAL_IDENTITY_PROVIDER_NAME` and 
@@ -41,6 +44,8 @@ If just getting started with this I would reccomend reading this [blog post](htt
         5. Your `SAML_METADATA_URL` will be here
     - From the dashboard, select **Users & Roles** and create two roles named **admin** and **user** (Ensure they are both lower case).
     - Create at least two users and have at least one assigned to each role.
+
+
 
 
 
